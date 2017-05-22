@@ -36,13 +36,13 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Hero.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="snow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,13 +59,13 @@
     <ClCompile Include="ChildView.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Hero.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="snow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -133,6 +133,18 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="snow1_07.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\bitmap7.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="backGround_1.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\..\..\Pictures\MFC素材\timg1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="snow1_00.png">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

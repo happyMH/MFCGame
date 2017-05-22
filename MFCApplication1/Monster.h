@@ -2,6 +2,7 @@
 
 #include "Resource.h"
 #include <iostream>
+#include "ChildView.h"
 
 //定义四个方向
 #define Right 0
@@ -9,13 +10,13 @@
 #define Up 2
 #define Down 3
 
-class Hero
+class Monster
 {
-public :
+public:
 	int x;                          // 横坐标
 	int y;                          //纵坐标
 
-	CImage character;                    //人物
+	CImage monster;                    //人物
 
 	int direct;                     //人物移动的方向
 	int frame;                      //当前方向人物的帧数
@@ -25,12 +26,12 @@ public :
 	int heigth;
 
 	int speed;
-	
-public :
+
+public:
 	void TransparentPNG();
-public :
-	Hero();
+public:
+	Monster();
 	void Initialzation(CString name_file);
-	~Hero();
+	~Monster();
 
 };

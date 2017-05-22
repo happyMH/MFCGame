@@ -185,9 +185,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="ChildView.h" />
-    <ClInclude Include="Hero.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MFCApplication1.h" />
     <ClInclude Include="Resource.h" />
@@ -196,9 +196,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="ChildView.cpp" />
-    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MFCApplication1.cpp" />
     <ClCompile Include="snow.cpp" />
@@ -213,17 +213,21 @@
     <ResourceCompile Include="MFCApplication1.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\..\..\..\Pictures\MFC素材\timg1.bmp" />
     <Image Include="backGround.png" />
+    <Image Include="backGround_1.png" />
     <Image Include="flor.png" />
     <Image Include="hero.png" />
     <Image Include="maliao.png" />
     <Image Include="res\backGround.bmp" />
     <Image Include="res\bitmap6.bmp" />
+    <Image Include="res\bitmap7.bmp" />
     <Image Include="res\hero_No.bmp" />
     <Image Include="res\hero_No.png" />
     <Image Include="res\MFCApplication1.ico" />
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\Toolbar256.bmp" />
+    <Image Include="snow1_00.png" />
     <Image Include="snow1_01.png" />
     <Image Include="snow1_02.png" />
     <Image Include="snow1_03.png" />

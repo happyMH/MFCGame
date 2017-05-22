@@ -84,17 +84,8 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
 IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
 
-IDB_BITMAP1             BITMAP                  "res\\timg.bmp"
 
-IDB_BITMAP2             BITMAP                  "C:\\Users\\吕明辉\\Documents\\我的大学记录\\课程资源\\大二下\\编译原理\\MFCApplication1\\MFCApplication1\\res\\backGround.bmp"
 
-IDB_BITMAP3             BITMAP                  "C:\\Users\\吕明辉\\Pictures\\MFC素材\\timg1.bmp"
-
-IDB_BITMAP4             BITMAP                  "res\\hero_No.bmp"
-
-IDB_BITMAP5             BITMAP                  "MFC素材\\timg1.bmp"
-
-IDB_BITMAP6             BITMAP                  "res\\bitmap6.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -271,7 +262,6 @@ END
 // PNG
 //
 
-IDB_PNG1                PNG                     "res\\hero_No.png"
 
 IDB_PNG2                PNG                     "hero.png"
 
@@ -296,6 +286,8 @@ IDB_PNG11               PNG                     "snow1_05.png"
 IDB_PNG12               PNG                     "snow1_06.png"
 
 IDB_PNG13               PNG                     "snow1_00.png"
+
+IDB_PNG14               PNG                     "backGround_1.png"
 
 
 /////////////////////////////////////////////////////////////////////////////

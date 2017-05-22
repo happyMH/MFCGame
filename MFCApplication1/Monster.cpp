@@ -1,30 +1,29 @@
 #include "stdafx.h"
-#include "Hero.h"
-
+#include "Monster.h"
 
 //PNG 的pucColor[0]， pucColor[1]，pucColor[2]， pucColor[3] 共同决定一个像素颜色
 //将PNG背景变透明
-void Hero::TransparentPNG()
+void Monster::TransparentPNG()
 {
-	for (int i = 0; i < character.GetWidth(); i++)
-		for (int j = 0; j < character.GetHeight(); j++)
+	for (int i = 0; i < monster.GetWidth(); i++)
+		for (int j = 0; j < monster.GetHeight(); j++)
 		{
-			unsigned char * pucColor = reinterpret_cast<unsigned char *>(character.GetPixelAddress(i, j));
+			unsigned char * pucColor = reinterpret_cast<unsigned char *>(monster.GetPixelAddress(i, j));
 			pucColor[0] = pucColor[0] * pucColor[3] / 255;
 			pucColor[1] = pucColor[1] * pucColor[3] / 255;
 			pucColor[2] = pucColor[2] * pucColor[3] / 255;
 		}
 }
 
-Hero::Hero()
-{
 
+Monster::Monster()
+{
 }
 
-void Hero::Initialzation(CString name_file)
+void Monster::Initialzation(CString name_file)
 {
 	//加载人物--英雄 
-	character.Load(name_file);
+	monster.Load(name_file);
 	TransparentPNG();
 
 	//设置人物初始参数	
@@ -32,7 +31,7 @@ void Hero::Initialzation(CString name_file)
 	frame = 0;
 	direct = Left;
 
-	x = 200;
+	x = 800;
 	y = 500;
 	width = 134;
 	heigth = 131;
@@ -40,7 +39,6 @@ void Hero::Initialzation(CString name_file)
 	speed = 40;
 }
 
-Hero::~Hero()
+Monster::~Monster()
 {
-	
 }

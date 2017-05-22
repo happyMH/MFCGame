@@ -4,9 +4,9 @@
 
 
 #pragma once
-#include "Hero.h"
 #include "Map.h"
 #include "Snow.h"
+#include "Character.h"
 
 
 // CChildView 窗口
@@ -22,7 +22,8 @@ public:
 
 // 特性
 public:
-	Hero m_hero;
+	Character m_hero;
+	Character m_monster;
 	Map m_map;
 	Snow snow;
 	CRect m_client;            //保存客户区大小	
@@ -44,8 +45,9 @@ protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
 public:
-
-	//相应
+	//初始化
+	void Initialize();
+	//响应
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	//计时
@@ -54,6 +56,10 @@ public:
 	//屏幕地址
 	void GetMapStartX();
 	int GetScreenX(int xHero, int mapWidth);
+	//怪物移动
+	void Move_Monster();
+	//判断相撞
+	bool Is_Hit();
 
 };
 

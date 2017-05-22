@@ -1,10 +1,7 @@
 #include "stdafx.h"
-#include "Hero.h"
+#include "Character.h"
 
-
-//PNG 的pucColor[0]， pucColor[1]，pucColor[2]， pucColor[3] 共同决定一个像素颜色
-//将PNG背景变透明
-void Hero::TransparentPNG()
+void Character::TransparentPNG()
 {
 	for (int i = 0; i < character.GetWidth(); i++)
 		for (int j = 0; j < character.GetHeight(); j++)
@@ -16,31 +13,25 @@ void Hero::TransparentPNG()
 		}
 }
 
-Hero::Hero()
+Character::Character()
 {
-
 }
 
-void Hero::Initialzation(CString name_file)
+
+void Character::Set_Image(CString name_file)
 {
-	//加载人物--英雄 
 	character.Load(name_file);
 	TransparentPNG();
-
-	//设置人物初始参数	
-	max_frame = 2;
-	frame = 0;
-	direct = Left;
-
-	x = 200;
-	y = 500;
-	width = 134;
-	heigth = 131;
-
-	speed = 40;
 }
 
-Hero::~Hero()
+void Character::Reference_Center()
 {
-	
+	center.x = place.x + width / 2;
+	center.y = place.y + height / 2;
+}
+
+
+
+Character::~Character()
+{
 }
