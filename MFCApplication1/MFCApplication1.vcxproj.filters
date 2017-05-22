@@ -99,19 +99,10 @@
     <Image Include="maliao.png">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="res\timg.bmp">
-      <Filter>资源文件</Filter>
-    </Image>
     <Image Include="res\backGround.bmp">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="..\..\..\..\..\..\..\Pictures\MFC素材\timg1.bmp">
-      <Filter>资源文件</Filter>
-    </Image>
     <Image Include="res\hero_No.bmp">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="MFC素材\timg1.bmp">
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="backGround.png">
