@@ -25,12 +25,14 @@ public:
 	Character m_hero;
 	Character m_monster;
 	Map m_map;
+	Map m_map_mask;
 	Snow snow;
 	CRect m_client;            //保存客户区大小	
 	CDC m_cacheDC;                //缓冲DC
 	CBitmap m_cacheBitmap;        //缓冲位图
 
 	int count;
+	int count_monster;
 
 // 重写
 	protected:
@@ -55,12 +57,16 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	//屏幕地址
 	void GetMapStartX();
+	void GetMapStartY();
 	int GetScreenHeroX(int xHero, int mapWidth);
+	int GetScreenHeroY(int yHero, int mapHeight);
 	int GetScreenMonsterX(int xMonster, int xHero);
 	//怪物移动
 	void Move_Monster();
 	//判断相撞
 	bool Is_Hit();
+	//判断是否能通过
+	bool Can_Pass(const Character &character);
 
 };
 

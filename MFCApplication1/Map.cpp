@@ -8,7 +8,9 @@ Map::Map()
 
 void Map::Initialzation(CString name_file)
 {
-	backGround.Load(name_file);
-	mapWidth = backGround.GetWidth();
+	map.Load(name_file);
+	mapWidth = map.GetWidth();
+	mapHeight = map.GetHeight();
 	xMapStart = 0;
+	yMapStart = 0;
 }

@@ -85,9 +85,6 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
 
 
-
-
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // Toolbar
@@ -262,7 +259,6 @@ END
 // PNG
 //
 
-
 IDB_PNG2                PNG                     "hero.png"
 
 IDB_PNG3                PNG                     "backGround.png"
@@ -288,6 +284,10 @@ IDB_PNG12               PNG                     "snow1_06.png"
 IDB_PNG13               PNG                     "snow1_00.png"
 
 IDB_PNG14               PNG                     "backGround_1.png"
+
+IDB_PNG15               PNG                     "Map.png"
+
+IDB_PNG16               PNG                     "Map_mengban.png"
 
 
 /////////////////////////////////////////////////////////////////////////////

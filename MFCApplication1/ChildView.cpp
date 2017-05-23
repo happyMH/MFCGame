@@ -50,6 +50,7 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	
 	Initialize();
 	count = 0;
+	count_monster = 0;
 	
 	return TRUE;
 }
@@ -67,23 +68,25 @@ void CChildView::OnPaint()
 	m_cacheBitmap.CreateCompatibleBitmap(cDc, m_client.Width(), m_client.Height());
 	m_cacheDC.SelectObject(&m_cacheBitmap);
 	
-	//GetMapStartX();
+	GetMapStartX();
+	GetMapStartY();
+
 	//第一步，加入一个背景--------------------------------------------
-	m_map.backGround.Draw(m_cacheDC, 
+	m_map.map.Draw(m_cacheDC, 
 		0,
 		0, 
 		m_client.Width(),
 		m_client.Height(),
 		m_map.xMapStart,
-		0, 
+		m_map.yMapStart, 
 		m_client.Width(), 
 		m_client.Height());
 
 	//第二步，导入一个人物--------------------------------------------
 	m_hero.character.Draw(m_cacheDC,
-		//GetScreenX(m_hero.place.x, m_map.mapWidth),
-		m_hero.place.x,
-		m_hero.place.y,
+		GetScreenHeroX(m_hero.place.x, m_map.mapWidth),
+		//m_hero.place.y,
+		GetScreenHeroY(m_hero.place.y, m_map.mapHeight),
 		m_hero.width,
 		m_hero.height,
 		m_hero.frame * m_hero.width, 
@@ -166,10 +169,13 @@ void CChildView::OnPaint()
 void CChildView::Initialize()
 {
 
-	//初始化--地板
-	CString backGround_file_name("backGround_1.png");
+	//初始化--地图
+	CString Map_file_name("Map.png");
+	m_map.Initialzation(Map_file_name);
 
-	m_map.Initialzation(backGround_file_name);
+	//初始化--地图蒙版
+	CString Map_Mask_file_name("Map_mengban.png");
+	m_map_mask.Initialzation(Map_Mask_file_name);
 
 	//初始化--英雄
 	CString hero_file_name("maliao.png");
@@ -221,24 +227,32 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	case 'd':
 	case 'D':
 		m_hero.direct = Right;
-		m_hero.frame = (m_hero.frame + 1) % 2;
-		m_hero.place.x += m_hero.speed;
+		if (Can_Pass(m_hero))
+		{
+			m_hero.frame = (m_hero.frame + 1) % 2;
+			m_hero.place.x += m_hero.speed;
+		}
 		break;
 	case 'a':
 	case 'A':
 		m_hero.direct = Left;
-		m_hero.frame = (m_hero.frame + 1) % 2;
-		m_hero.place.x -= m_hero.speed;
+		if (Can_Pass(m_hero))
+		{
+			m_hero.frame = (m_hero.frame + 1) % 2;
+			m_hero.place.x -= m_hero.speed;
+		}
 		break;
 	case 'w':
 	case 'W':
 		m_hero.direct = Up;
-		m_hero.place.y -= m_hero.speed;
+		if (Can_Pass(m_hero))
+			m_hero.place.y -= m_hero.speed;
 		break;
 	case 's':
 	case 'S':
 		m_hero.direct = Down;
-		m_hero.place.y += m_hero.speed;
+		if (Can_Pass(m_hero))
+			m_hero.place.y += m_hero.speed;
 		break;
 	case 't':
 	case 'T':
@@ -255,7 +269,6 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 	m_hero.place.x = point.x;
 	m_hero.place.y = point.y;
 }
-
 
 void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
@@ -275,16 +288,20 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 			switch (m_hero.direct)
 			{
 			case Left:
-				m_hero.place.x -= m_hero.speed;
+				if (Can_Pass(m_hero))
+					m_hero.place.x -= m_hero.speed;
 				break;
 			case Right:
-				m_hero.place.x += m_hero.speed;
+				if (Can_Pass(m_hero))
+					m_hero.place.x += m_hero.speed;
 				break;
 			case Up:
-				m_hero.place.y -= m_hero.speed;
+				if (Can_Pass(m_hero))
+					m_hero.place.y -= m_hero.speed;
 				break;
 			case Down:
-				m_hero.place.y += m_hero.speed;
+				if (Can_Pass(m_hero))
+					m_hero.place.y += m_hero.speed;
 				break;
 			}
 
@@ -297,7 +314,6 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 	}
 }
 
-
 int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CWnd::OnCreate(lpCreateStruct) == -1)
@@ -306,7 +322,7 @@ int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//创建一个10ms产生一次消息的定时器
 	SetTimer(TIMER_PAINT, 10, NULL);
 	//创建人物行走动画定时器
-	SetTimer(TIMER_HEROMOVE, 200, NULL);
+	//SetTimer(TIMER_HEROMOVE, 200, NULL);
 
 	return 0;
 }
@@ -315,6 +331,12 @@ void CChildView::GetMapStartX()
 {
 	if (m_hero.place.x < m_map.mapWidth - m_client.Width() / 2 && m_hero.place.x > m_client.Width() / 2)
 		m_map.xMapStart = m_hero.place.x - m_client.Width() / 2;
+}
+
+void CChildView::GetMapStartY()
+{
+	if (m_hero.place.y < m_map.mapHeight - m_client.Height() / 2 && m_hero.place.y > m_client.Height() / 2)
+		m_map.yMapStart = m_hero.place.y - m_client.Height() / 2;
 }
 
 int CChildView::GetScreenHeroX(int xHero, int mapWidth)
@@ -328,9 +350,20 @@ int CChildView::GetScreenHeroX(int xHero, int mapWidth)
 		return m_client.Width() - (mapWidth - xHero);
 }
 
+int CChildView::GetScreenHeroY(int yHero, int mapHeight)
+{
+	//如果人物不在最上边和最下边半个屏幕内时，那么人物就处在屏幕中间
+	if (yHero < mapHeight - m_client.Height() / 2 && yHero > m_client.Height() / 2)
+		return m_client.Height() / 2;
+	else if (yHero <= m_client.Height() / 2)
+		return yHero;
+	else
+		return m_client.Height() - (mapHeight - yHero);
+}
+
 int CChildView::GetScreenMonsterX(int xMonster, int xHero)
 {
-	return GetScreenHeroX(xHero, m_client.Width()) + (xMonster - xHero);
+	return GetScreenHeroX(xHero, m_map.mapWidth) + (xMonster - xHero);
 }
 
 void CChildView::Move_Monster()
@@ -339,14 +372,36 @@ void CChildView::Move_Monster()
 	if (m_monster.place.x < m_hero.place.x)
 	{
 		m_monster.direct = Right;
-		m_monster.place.x += m_monster.speed;
-		m_monster.frame = (m_monster.frame + 1) % 2;
+		if (Can_Pass(m_monster))
+		{
+			m_monster.place.x += m_monster.speed;
+			if (count_monster % 20 == 0)
+			{
+				m_monster.frame = (m_monster.frame + 1) % 2;
+				count_monster++;
+			}
+			else
+			{
+				count_monster++;
+			}
+		}
 	}
-	else
+	else 
 	{
 		m_monster.direct = Left;
-		m_monster.place.x -= m_monster.speed;
-		m_monster.frame = (m_monster.frame + 1) % 2;
+		if (Can_Pass(m_monster))
+		{
+			m_monster.place.x -= m_monster.speed;
+			if (count_monster % 20 == 0)
+			{
+				m_monster.frame = (m_monster.frame + 1) % 2;
+				count_monster++;
+			}
+			else
+			{
+				count_monster++;
+			}
+		}
 	}
 
 	//竖直方向
@@ -374,4 +429,51 @@ bool CChildView::Is_Hit()
 		return true;
 	else
 		return false;
+}
+
+bool CChildView::Can_Pass(const Character & character)
+{
+
+	if (character.direct == Up)
+	{
+		for (int x = character.place.x; x < character.place.x + character.width; x++)
+			for (int y = character.place.y; y > character.place.y - character.speed; y--)
+				if (m_map_mask.map.GetPixel(x, y) == RGB(0, 0, 0))
+					return false;
+
+		return true;
+	}
+
+	if (character.direct == Down)
+	{
+		for (int x = character.place.x; x < character.place.x + character.width; x++)
+			for (int y = character.place.y + character.height; y < character.place.y + character.height + character.speed; y++)
+				if (m_map_mask.map.GetPixel(x, y) == RGB(0, 0, 0))
+					return false;
+
+		return true;
+	}
+
+
+		if (character.direct == Left)
+		{
+			for (int y = character.place.y; y < character.place.y + character.height; y++)
+				for (int x = character.place.x; x > character.place.x - character.speed; x--)
+					if (m_map_mask.map.GetPixel(x, y) == RGB(0, 0, 0))
+						return false;
+
+			return true;
+		}
+
+		if (character.direct == Right)
+		{
+			for (int y = character.place.y; y < character.place.y + character.height; y++)
+				for (int x = character.place.x + character.width; x < character.place.x + character.width + character.speed; x++)
+					if (m_map_mask.map.GetPixel(x, y) == RGB(0, 0, 0))
+						return false;
+
+			return true;
+		}
+
+	return true;
 }
