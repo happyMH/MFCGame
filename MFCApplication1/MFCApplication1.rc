@@ -259,13 +259,7 @@ END
 // PNG
 //
 
-IDB_PNG2                PNG                     "hero.png"
-
 IDB_PNG3                PNG                     "backGround.png"
-
-IDB_PNG4                PNG                     "flor.png"
-
-IDB_PNG5                PNG                     "step.png"
 
 IDB_PNG6                PNG                     "maliao.png"
 

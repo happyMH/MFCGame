@@ -87,28 +87,13 @@
     <Image Include="res\Toolbar256.bmp">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="hero.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="step.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="res\hero_No.png">
-      <Filter>资源文件</Filter>
-    </Image>
     <Image Include="maliao.png">
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\backGround.bmp">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="res\hero_No.bmp">
-      <Filter>资源文件</Filter>
-    </Image>
     <Image Include="backGround.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="flor.png">
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\bitmap6.bmp">
@@ -139,9 +124,6 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="backGround_1.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\..\..\Pictures\MFC素材\timg1.bmp">
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="snow1_00.png">
