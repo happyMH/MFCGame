@@ -116,7 +116,7 @@ void CChildView::OnPaint()
 
 	//第四步，导入怪物
 	m_monster.character.Draw(m_cacheDC, 
-		m_monster.place.x, 
+		GetScreenMonsterX( m_monster.place.x,m_hero.place.x), 
 		m_monster.place.y, 
 		m_monster.width,
 		m_monster.height,
@@ -317,7 +317,7 @@ void CChildView::GetMapStartX()
 		m_map.xMapStart = m_hero.place.x - m_client.Width() / 2;
 }
 
-int CChildView::GetScreenX(int xHero, int mapWidth)
+int CChildView::GetScreenHeroX(int xHero, int mapWidth)
 {
 	//如果人物不在最左边和最右边半个屏幕内时，那么人物就处在屏幕中间
 	if (xHero < mapWidth - m_client.Width() / 2 && xHero > m_client.Width() / 2)
@@ -326,6 +326,11 @@ int CChildView::GetScreenX(int xHero, int mapWidth)
 		return xHero;
 	else
 		return m_client.Width() - (mapWidth - xHero);
+}
+
+int CChildView::GetScreenMonsterX(int xMonster, int xHero)
+{
+	return GetScreenHeroX(xHero, m_client.Width()) + (xMonster - xHero);
 }
 
 void CChildView::Move_Monster()

@@ -55,7 +55,8 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	//屏幕地址
 	void GetMapStartX();
-	int GetScreenX(int xHero, int mapWidth);
+	int GetScreenHeroX(int xHero, int mapWidth);
+	int GetScreenMonsterX(int xMonster, int xHero);
 	//怪物移动
 	void Move_Monster();
 	//判断相撞
